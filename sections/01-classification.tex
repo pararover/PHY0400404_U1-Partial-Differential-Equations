@@ -1,0 +1,165 @@
+\section{Introduction to partial differential equations}
+    A partial differential equation (or PDE) is an equation that involves an unknown function of two or more variables and its partial derivatives.
+    
+    For an unknown function $u(x_1,x_2,\dots,x_n)$, a general form of a PDE is given below:
+    \begin{align*}
+        F\qty(x_1,x_2,\dots,x_n,u,\pdv{u}{x_i},\pdv[2]{u}{x_i}{x_j},\dots)=0
+    \end{align*}
+
+    \subsection{Classification of PDEs}
+        There are mainly four ways to classify PDEs: \textbf{H}omogenity, \textbf{O}rder, \textbf{L}inearity and \textbf{D}egree (remember: \textit{HOLD}).
+
+        \subsubsection{Order}
+            The \textit{order} of a PDE is the order of the highest partial derivative.
+
+            \textit{Examples}:
+            \renewcommand{\arraystretch}{2.2}
+            \begin{table}[h!]
+                \centering
+                \begin{tabular}{p{0.25\textwidth}cc}
+                    \toprule[1.5pt]
+                    \textbf{PDE} & \textbf{Highest derivative} & \textbf{Order} \\ \midrule[1.5pt]
+                    {$\pdv{u}{x}+\pdv{u}{y}=0$} & {first} & {1} \\ %\hline
+                    {$\pdv{u}{t}-u\pdv{u}{x}=0$} & {first} & {1} \\ %\hline
+                    {$\pdv[2]{u}{x}-\pdv[2]{u}{x}{y}+\pdv[2]{u}{y}=0$} & {second} & {2} \\ %\hline
+                    {$\pdv[2]{u}{t}-\alpha\pdv{u}{x}=0$} & {second} & {2} \\ %\hline
+                    {$\pdv[3]{u}{x}-\pdv{u}{y}=0$} & {third} & {3} \\
+                    \bottomrule[1.5pt]
+                \end{tabular}
+            \end{table}
+
+        \subsubsection{Degree}
+            The \textit{degree} of a PDE is the power of the highest derivative when the PDE is a polynomial in derivatives.
+
+            \textit{Examples}:
+            \renewcommand{\arraystretch}{2.2}
+            \begin{table}[h!]
+                \centering
+                \begin{tabular}{p{0.25\textwidth}ccc}
+                    \toprule[1.5pt]
+                    \textbf{PDE} & \textbf{Highest derivative} & \textbf{Order} & \textbf{Degree} \\ \midrule[1.5pt]
+                    {$\pdv{u}{x}+\pdv{u}{y}=0$} & {first} & {1} & {1} \\ %\hline
+                    {$\pdv[2]{u}{x}+\qty(\pdv{u}{t})^2=0$} & {second} & {2} & {1} \\ %\hline
+                    {$\qty(\pdv{u}{x})^2++\pdv{u}{y}=5$} & {first} & {1} & {2} \\ %\hline
+                    {$\pdv[2]{u}{x}-\sqrt{1+\qty(\pdv{u}{y})^2}=0$} & {second} & {2} & {2} \\
+                    \bottomrule[1.5pt]
+                \end{tabular}
+            \end{table}
+
+        \subsubsection{Linearity}
+            A PDE is said to be \textit{linear} if the unknown function and its derivatives appear linearly, i.e. there are no products of its derivatives or no non-linear functions of derivatives; otherwise the PDE is said to be \textit{non-linear}.
+
+            \textit{Examples}:
+            \renewcommand{\arraystretch}{2.2}
+            \begin{table}[h!]
+                \centering
+                \begin{tabular}{p{0.3\textwidth}c}
+                    \toprule[1.5pt]
+                    \textbf{PDE} & \textbf{Linearity} \\ \midrule[1.5pt]
+                    {$\pdv{u}{x}+\pdv{u}{y}=0$} & {linear} \\ %\hline
+                    {$\pdv{u}{t}-k\pdv[2]{u}{x}=0$} & {linear} \\ %\hline
+                    {$\pdv[2]{u}{x}+\pdv[2]{u}{y}=0$} & {linear} \\ %\hline
+                    {$\pdv{u}{t}+u\pdv{u}{x}=0$} & {non-linear} \\ %\hline
+                    {$\pdv{u}{t}=\qty(\pdv{u}{x})^2$} & {non-linear} \\
+                    {$\qty(\pdv[2]{u}{x})^2+\pdv[2]{u}{y}=0$} & {non-linear} \\
+                    \bottomrule[1.5pt]
+                \end{tabular}
+            \end{table}
+
+        \subsubsection{Homogeneity}
+            A PDE is said to be \textit{homogeneous} if every term in the equation involves the unknown function or one of its derivatives, and no terms that do not depend on the unknown function; otherwise the PDE is said to be \textit{inhomogeneous}.
+
+            \newpage
+            \textit{Examples}:
+            \renewcommand{\arraystretch}{2.2}
+            \begin{table}[h!]
+                \centering
+                \begin{tabular}{p{0.4\textwidth}c}
+                    \toprule[1.5pt]
+                    \textbf{PDE} & \textbf{Homogeneity} \\ \midrule[1.5pt]
+                    {$\pdv{u}{t}+c\pdv{u}{x}=0$} & {homogeneous} \\ %\hline
+                    {$\pdv[2]{u}{x}+\pdv[2]{u}{y}=0$} & {homogeneous} \\ %\hline
+                    {$\pdv[2]{u}{t}-c^2\pdv[2]{u}{x}=0$} & {homogeneous} \\ %\hline
+                    {$\pdv{u}{t}-k\pdv[2]{u}{x}=xe^{-t^2}$} & {inhomogeneous} \\ %\hline
+                    {$\pdv[2]{u}{x}+\pdv[2]{u}{y}=5\sinh{x^2}-3\cosh{t}$} & {inhomogeneous} \\
+                    {$\pdv{u}{t}+\pdv{u}{x}=x$} & {inhomogeneous} \\
+                    \bottomrule[1.5pt]
+                \end{tabular}
+            \end{table}
+
+    \subsection{Second order, first degree linear PDEs}
+        Second order, first degree linear PDEs are of particular interest in Physics because they appear in many different scenarios. Also they are easier to handle because their solutions are superposable as long as the equation is linear and homogenous.
+
+        Such equations have the following general form:
+        \begin{align*}
+            A\pdv[2]{u}{x}+B\pdv[2]{u}{x}{t}+C\pdv[2]{u}{t}+D\pdv{u}{x}+E\pdv{u}{t}+Fy=G
+        \end{align*}
+        where, in general, the coefficients $A$, $B$, $C$, $D$, $E$, $F$ and $G$ may depend on $x$ and $t$.
+
+        Such PDEs may be further classified as follows:
+        \begin{align*}
+            B^2-4AC\begin{cases}
+                {<0} & {\implies\text{ elliptic}} \\
+                {=0} & {\implies\text{ parabolic}} \\
+                {>0} & {\implies\text{ hyperbolic}}
+            \end{cases}
+        \end{align*}
+
+        For instance, consider the Laplace equation in two dimensions:
+        \begin{align*}
+            \pdv[2]{u}{x}+\pdv[2]{u}{y}=0
+        \end{align*}
+        Considering $y\rightarrow t$ and comparing with the general form, we find that
+        \begin{align*}
+            A=1,\;B=0,\;C=1
+        \end{align*}
+        which gives us
+        \begin{align*}
+            B^2-4AC&=0^2-4\cdot 1\cdot 1=-4 \\
+            \implies B^2-4AC&<0
+        \end{align*}
+        Therefore the \textit{Laplace equation in two dimensions is elliptic}.
+
+    \subsection{Standard PDEs in Physics}
+        \begin{enumerate}
+            \item \ul{Euler equation}:
+            \begin{align*}
+                \Aboxed{\pdv{\vb*{u}}{t}+\qty(\vb*{u}\cdot\gradient)\vb*{u}&=-\dfrac{\gradient{P}}{\rho}}
+            \end{align*}
+            A \textit{first order}, \textit{first degree}, \textit{non-linear}, \textit{inhomogeneous} PDE.
+            
+            \item \ul{Laplace equation}:
+            \begin{align*}
+                \pdv[2]{u}{x}+\pdv[2]{u}{y}+\pdv[2]{u}{z}&=0 \\
+                \text{or, }\Aboxed{\laplacian{u}&=0}
+            \end{align*}
+            A \textit{second order}, \textit{first degree}, \textit{linear}, \textit{homogeneous} PDE (elliptic).
+
+            \item \ul{Poisson equation}:
+            \begin{align*}
+                \pdv[2]{u}{x}+\pdv[2]{u}{y}+\pdv[2]{u}{z}&=f(x,y,z) \\
+                \text{or, }\Aboxed{\laplacian{u}&=f(x,y,z)}
+            \end{align*}
+            A \textit{second order}, \textit{first degree}, \textit{linear}, \textit{inhomogeneous} PDE (elliptic).
+
+            \item \ul{Helmholtz equation}:
+            \begin{align*}
+                \pdv[2]{\psi}{x}+\pdv[2]{\psi}{y}+\pdv[2]{\psi}{z}\pm k^2\psi&=0 \\
+                \text{or, }\Aboxed{\laplacian{\psi}\pm k^2\psi&=0}
+            \end{align*}
+            A \textit{second order}, \textit{first degree}, \textit{linear}, \textit{homogeneous} PDE (elliptic).
+
+            \item \ul{Diffusion equation}:
+            \begin{align*}
+                \pdv[2]{\psi}{x}+\pdv[2]{\psi}{y}+\pdv[2]{\psi}{z}&=\dfrac{1}{a^2}\pdv{\psi}{t} \\
+                \text{or, }\Aboxed{\laplacian{\psi}&=\dfrac{1}{a^2}\pdv{\psi}{t}}
+            \end{align*}
+            A \textit{second order}, \textit{first degree}, \textit{linear}, \textit{homogeneous} PDE (parabolic).
+
+            \item \ul{Wave equation}:
+            \begin{align*}
+                \pdv[2]{u}{x}+\pdv[2]{u}{y}+\pdv[2]{u}{z}&=\dfrac{1}{c^2}\pdv[2]{\psi}{t} \\
+                \text{or, }\Aboxed{\laplacian{u}&=\dfrac{1}{c^2}\pdv[2]{\psi}{t}}
+            \end{align*}
+            A \textit{second order}, \textit{first degree}, \textit{linear}, \textit{homogeneous} PDE (hyperbolic).
+        \end{enumerate}

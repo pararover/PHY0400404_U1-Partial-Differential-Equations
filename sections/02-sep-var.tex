@@ -1,0 +1,210 @@
+\section{Separation of variables}
+    The method of \textit{separation of variables} is a procedure to solve some linear and homogeneous PDEs by assuming that the solution can be written as a product of functions, with each function depending on only one independent variable. Substituting this product form into the PDE allows the equation to be separated into simpler ordinary differential equations (ODEs).
+
+    Suppose we want to solve a PDE for an unknown function $u$ of two variables $x$ and $t$, i.e. $u=u(x,t)$. We assume that
+    \begin{align*}
+        u(x,t)=X(x)T(t)
+    \end{align*}
+    where the function $X$ depends only on $x$ and the function $T$ depends only on $t$.
+
+    When this form is substituted into the original PDE, the result often allows us to separate the variables so that all terms involving $x$ appear on one side and all terms involving $t$ on the other. Because the two sides depend on different independent variables, each side must equal a constant. This leads to a pair of ODEs --- one for each variable.
+
+    \begin{itemize}
+        \item The method is typically used for linear, homogeneous PDEs with appropriate boundary conditions.
+        \item The method is especially useful when the domain has simple geometry (e.g. rectangular or cylindrical) and when one can choose coordinates that allow the PDE to be separated.
+        \item Common equations solved this way include the heat equation, wave equation and Laplace's equation.
+    \end{itemize}
+
+    \subsection{Basic procedure}
+        \begin{enumerate}[I.]
+            \item We assume a separable solution of the form
+            \begin{align*}
+                u(x,t)=X(x)T(t)
+            \end{align*}
+
+            \item We substitute $X(x)T(t)$ for $u(x,t)$ in the PDE and simplify.
+
+            \item The equation is divided throughout by $X(x)T(t)$ to isolate the terms in variable $x$ on one side and the terms in variable $t$ on the other side.
+
+            \item Because either side depends on variable that are independent of each other, it follows that both expressions must equal a constant. This leads to two ODEs.
+
+            \item The ODEs are solved to obtain $X(x)$ and $T(t)$, which are then combined to obtain the general solution $u(x,t)$.
+
+            \item Any given initial or boundary conditions are applied on $u(x,t)$ to obtain the complete solution.
+        \end{enumerate}
+
+    \subsection{Examples}
+        \begin{enumerate}
+            \item Find the solution of the following PDE using the method of separation of variables:
+            \begin{align*}
+                2\pdv{u}{x}+5\pdv{u}{y}=0.
+            \end{align*}
+            \textbf{Solution}: \setcounter{equation}{0}
+            We assume the solution
+            \begin{align}
+                u(x,y)=X(x)Y(y) \label{eqn:assumed-soln:eg-01}
+            \end{align}
+            This gives us
+            \begin{align*}
+                \pdv{u}{x}=Y(y)\dv{X}{x}\qq{and}\pdv{u}{y}=X(x)\dv{Y}{y}
+            \end{align*}
+            Substituting in the given PDE, we obtain
+            \begin{align}
+                2Y(y)\dv{X}{x}&+5X(x)\dv{Y}{y}=0 \nonumber\\
+                \implies 2Y(y)\dv{X}{x}&=-5X(x)\dv{Y}{y} \label{eqn:subs-pde:eg-01}
+            \end{align}
+            Dividing equation (\ref{eqn:subs-pde:eg-01}) by $X(x)Y(y)$, we get
+            \begin{align}
+                \dfrac{1}{X(x)\cancel{Y(y)}}\times 2\cancel{Y(y)}\dv{X}{x}&=-5\cancel{X(x)}\dv{Y}{y}\times \dfrac{1}{\cancel{X(x)}Y(y)} \nonumber\\
+                \implies\dfrac{2}{X(x)}\dv{X}{x}&=-\dfrac{5}{Y(y)}\dv{Y}{y} \label{eqn:indep-sides:eg-01}
+            \end{align}
+            In equation (\ref{eqn:indep-sides:eg-01}), the LHS depends only on $x$ and the RHS depends only on $y$. Because $x$ and $y$ are independent, the only way for equation (\ref{eqn:indep-sides:eg-01}) to hold good is if both sides are simultaneously equation to the same constant $k$, i.e.
+            \begin{align}
+                \dfrac{2}{X(x)}\dv{X}{x}=&k=-\dfrac{5}{Y(y)}\dv{Y}{y} \nonumber\\
+                \implies &\dfrac{2}{X(x)}\dv{X}{x}=k \label{eqn:ode-X:eg-01}\\
+                \qq{and} &\dfrac{5}{Y(y)}\dv{Y}{y}=-k \label{eqn:ode-Y:eg-01}
+            \end{align}
+
+            To solve equation (\ref{eqn:ode-X:eg-01}), we have
+            \begin{align}
+                \dfrac{2}{X(x)}\dv{X}{x}=k\;\implies\dfrac{\dd{X}}{X}&=\dfrac{k}{2}\dd{x} \nonumber\\
+                \implies\int{\dfrac{\dd{X}}{X}}&=\int{\dfrac{k}{2}\dd{x}} \nonumber\\
+                \implies\ln{X}&=\dfrac{kx}{2}+\ln{c_1}\qq{[where $\ln{c_1}$ is the integration constant]} \nonumber\\
+                \implies\ln{X}-\ln{c_1}&=\dfrac{kx}{2} \nonumber\\
+                \implies\ln\qty(\dfrac{X}{c_1})&=\dfrac{kx}{2} \nonumber\\
+                \implies\dfrac{X}{c_1}&=e^{kx/2} \nonumber\\
+                \implies X(x)&=c_1e^{kx/2} \label{eqn:X-soln:eg-01}
+            \end{align}
+
+            Similarly, to solve equation (\ref{eqn:ode-Y:eg-01}), we have
+            \begin{align}
+                \dfrac{5}{Y(y)}\dv{Y}{y}=-k\;\implies\dfrac{\dd{Y}}{Y}&=-\dfrac{k}{5}\dd{y} \nonumber\\
+                \implies\int{\dfrac{\dd{Y}}{Y}}&=-\int{\dfrac{k}{5}\dd{y}} \nonumber\\
+                \implies\ln{Y}&=-\dfrac{ky}{5}+\ln{c_2}\qq{[where $\ln{c_2}$ is the integration constant]} \nonumber\\
+                \implies\ln{Y}-\ln{c_2}&=-\dfrac{ky}{5} \nonumber\\
+                \implies\ln\qty(\dfrac{Y}{c_2})&=-\dfrac{ky}{5} \nonumber\\
+                \implies\dfrac{Y}{c_2}&=e^{-ky/5} \nonumber\\
+                \implies Y(y)&=c_2e^{-ky/5} \label{eqn:Y-soln:eg-01}
+            \end{align}
+
+            Finally, substituting equations (\ref{eqn:X-soln:eg-01}) and (\ref{eqn:Y-soln:eg-01}) into equation (\ref{eqn:assumed-soln:eg-01})
+            \begin{align*}
+                u(x,y)&=X(x)Y(y) \\
+                    &=\qty(c_1e^{kx/2})\qty(c_2e^{-ky/5}) \\
+                    &=\underbrace{c_1c_2}_{=c}e^{k\qty(x/2-y/5)} \\
+                \implies \Aboxed{u(x,y)&=ce^{k\qty(x/2-y/5)}}
+            \end{align*}
+            which gives us the general solution of the PDE.
+
+            \item Find the solution of the following PDE using the method of separation of variables:
+            \begin{align*}
+                \pdv{u}{x}=4\pdv{u}{y},\text{ with }u(0,y)=8e^{-3y}.
+            \end{align*}
+            \textbf{Solution}: \setcounter{equation}{0}
+            We assume the solution
+            \begin{align}
+                u(x,y)=X(x)Y(y) \label{eqn:assumed-soln:eg-02}
+            \end{align}
+            This gives us
+            \begin{align*}
+                \pdv{u}{x}=Y(y)\dv{X}{x}\qq{and}\pdv{u}{y}=X(x)\dv{Y}{y}
+            \end{align*}
+            Substituting in the given PDE, we obtain
+            \begin{align}
+                Y(y)\dv{X}{x}&=4X(x)\dv{Y}{y} \label{eqn:subs-pde:eg-02}
+            \end{align}
+            Dividing equation (\ref{eqn:subs-pde:eg-02}) by $X(x)Y(y)$, we get
+            \begin{align}
+                \dfrac{1}{X(x)\cancel{Y(y)}}\times \cancel{Y(y)}\dv{X}{x}&=4\cancel{X(x)}\dv{Y}{y}\times \dfrac{1}{\cancel{X(x)}Y(y)} \nonumber\\
+                \implies\dfrac{1}{X(x)}\dv{X}{x}&=\dfrac{4}{Y(y)}\dv{Y}{y} \label{eqn:indep-sides:eg-02}
+            \end{align}
+            In equation (\ref{eqn:indep-sides:eg-02}), the LHS depends only on $x$ and the RHS depends only on $y$. Because $x$ and $y$ are independent, the only way for equation (\ref{eqn:indep-sides:eg-02}) to hold good is if both sides are simultaneously equation to the same constant $k$, i.e.
+            \begin{align}
+                \dfrac{1}{X(x)}\dv{X}{x}=&k=\dfrac{4}{Y(y)}\dv{Y}{y} \nonumber\\
+                \implies &\dfrac{1}{X(x)}\dv{X}{x}=k \label{eqn:ode-X:eg-02}\\
+                \qq{and} &\dfrac{4}{Y(y)}\dv{Y}{y}=k \label{eqn:ode-Y:eg-02}
+            \end{align}
+
+            To solve equation (\ref{eqn:ode-X:eg-02}), we have
+            \begin{align}
+                \dfrac{1}{X(x)}\dv{X}{x}=k\;\implies\dfrac{\dd{X}}{X}&=k\dd{x} \nonumber\\
+                \implies\int{\dfrac{\dd{X}}{X}}&=\int{k\dd{x}} \nonumber\\
+                \implies\ln{X}&=kx+\ln{c_1}\qq{[where $\ln{c_1}$ is the integration constant]} \nonumber\\
+                \implies\ln{X}-\ln{c_1}&=kx \nonumber\\
+                \implies\ln\qty(\dfrac{X}{c_1})&=kx \nonumber\\
+                \implies\dfrac{X}{c_1}&=e^{kx} \nonumber\\
+                \implies X(x)&=c_1e^{kx} \label{eqn:X-soln:eg-02}
+            \end{align}
+
+            Similarly, to solve equation (\ref{eqn:ode-Y:eg-02}), we have
+            \begin{align}
+                \dfrac{4}{Y(y)}\dv{Y}{y}=k\;\implies\dfrac{\dd{Y}}{Y}&=\dfrac{k}{4}\dd{y} \nonumber\\
+                \implies\int{\dfrac{\dd{Y}}{Y}}&=\int{\dfrac{k}{4}\dd{y}} \nonumber\\
+                \implies\ln{Y}&=\dfrac{ky}{4}+\ln{c_2}\qq{[where $\ln{c_2}$ is the integration constant]} \nonumber\\
+                \implies\ln{Y}-\ln{c_2}&=\dfrac{ky}{4} \nonumber\\
+                \implies\ln\qty(\dfrac{Y}{c_2})&=\dfrac{ky}{4} \nonumber\\
+                \implies\dfrac{Y}{c_2}&=e^{ky/4} \nonumber\\
+                \implies Y(y)&=c_2e^{ky/4} \label{eqn:Y-soln:eg-02}
+            \end{align}
+
+            Finally, substituting equations (\ref{eqn:X-soln:eg-02}) and (\ref{eqn:Y-soln:eg-02}) into equation (\ref{eqn:assumed-soln:eg-02})
+            \begin{align}
+                u(x,y)&=X(x)Y(y) \nonumber\\
+                    &=\qty(c_1e^{kx})\qty(c_2e^{ky/4}) \nonumber\\
+                    &=\underbrace{c_1c_2}_{=c}e^{k\qty(x+y/4)} \nonumber\\
+                \implies u(x,y)&=ce^{k\qty(x+y/4)} \label{eqn:gen-soln:eg-02}
+            \end{align}
+            which gives us the general solution of the PDE.
+
+            It is also given that $u(0,y)=8e^{-3y}$. With $x=0$ in equation (\ref{eqn:gen-soln:eg-02}), we obtain
+            \begin{align*}
+                u(0,y)&=ce^{k\qty(0+y/4)} \\
+                \implies 8e^{-3y}&=ce^{ky/4}
+            \end{align*}
+            Comparing both sides in the above, we find that
+            \begin{align*}
+                c=8\qq{and}\dfrac{k}{4}=-3\implies k=-12
+            \end{align*}
+
+            Substituting for $c$, $k$ in equation (\ref{eqn:gen-soln:eg-02}) gives us the complete solution as
+            \begin{align*}
+                \Aboxed{u(x,y)&=8e^{-12\qty(x+y/4)}}
+            \end{align*}
+        \end{enumerate}
+
+\section*{Exercises}
+    \begin{enumerate}
+        \item Find the general solution of the following PDE using the method of separation of variables:
+        \begin{align*}
+            y^3\pdv{z}{x}+x^2\pdv{z}{y}=0.
+        \end{align*}
+
+        \item Solve the following PDE using the method of separation of variables:
+        \begin{align*}
+            \pdv{u}{x}+\pdv{u}{y}=2(x+y)u.
+        \end{align*}
+
+        \item Find the complete solution of the following PDE using the method of separation of variables:
+        \begin{align*}
+            \pdv{u}{x}=2\pdv{u}{y}+u,\text{ with }u(x,0)=4e^{-3x}.
+        \end{align*}
+
+        \item Solve the following PDE using the method of separation of variables:
+        \begin{align*}
+            \pdv[2]{z}{x}-2\pdv{z}{x}+\pdv{z}{y}=0.
+        \end{align*}
+
+        \item Find the complete solution of the following PDE using the method of separation of variables:
+        \begin{align*}
+            \pdv[2]{u}{x}{t}=e^{-t}\cos{x}
+        \end{align*}
+        given that $u=0$ when $t=0$, and $\pdv{u}{t}=0$ when $x=0$.
+
+        \item Solve the following PDEs using the method of separation of variables:
+        \begin{enumerate}
+            \item $\pdv[2]{u}{x}-\pdv{u}{y}=0$
+            \item $4\pdv{u}{x}+\pdv{u}{y}=3u$ with $u(0,y)=e^{-5y}$
+            \item $2x\pdv{z}{x}-3y\pdv{z}{y}=0$
+            \item $4\pdv{u}{t}+\pdv{u}{x}=3u$ with $u(x,0)=3e^{-x}-e^{-5x}$
+        \end{enumerate}
+    \end{enumerate}
